@@ -33,7 +33,8 @@ class Student {
 
     @Override
     public String toString() {
-        return "Student{name=" + name + ", surname=" + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
+        return "Student{name=" + name + ", surname="
+                + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
     }
 
     @Override
@@ -54,8 +55,10 @@ class Student {
             return false;
         }
 
-        return this.GPA == normalizedStudent.GPA && this.year == normalizedStudent.year
-                && this.name.equals(normalizedStudent.name) && this.surname.equals(normalizedStudent.surname);
+        return this.GPA == normalizedStudent.GPA
+                && this.year == normalizedStudent.year
+                && this.name.equals(normalizedStudent.name)
+                && this.surname.equals(normalizedStudent.surname);
 
     }
 }

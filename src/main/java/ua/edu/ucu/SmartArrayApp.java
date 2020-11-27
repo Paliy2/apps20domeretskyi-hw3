@@ -5,7 +5,12 @@ import java.util.Arrays;
 import ua.edu.ucu.functions.MyComparator;
 import ua.edu.ucu.functions.MyFunction;
 import ua.edu.ucu.functions.MyPredicate;
-import ua.edu.ucu.smartarr.*;
+import ua.edu.ucu.smartarr.BaseArray;
+import ua.edu.ucu.smartarr.DistinctDecorator;
+import ua.edu.ucu.smartarr.FilterDecorator;
+import ua.edu.ucu.smartarr.MapDecorator;
+import ua.edu.ucu.smartarr.SortDecorator;
+import ua.edu.ucu.smartarr.SmartArray;
 
 public class SmartArrayApp {
 
@@ -50,35 +55,45 @@ public class SmartArrayApp {
         return Arrays.copyOf(result, result.length, Integer[].class);
     }
 
-    public static String[]
+    public static <grade> String[]
     findDistinctStudentNamesFrom2ndYearWithGPAgt4AndOrderedBySurname(Student[] students) {
 
         MyPredicate filterBySecondYearAndGPA = new MyPredicate() {
+            final int grade = 4;
+            final int course = 2;
+
             @Override
             public boolean test(Object t) {
-                return ((Student) t).getYear() == 2 && ((Student) t).getGPA() >= 4;
+                return ((Student) t).getYear() == course
+                        && ((Student) t).getGPA() >= grade;
             }
         };
 
         MyFunction nameToFindUnique = new MyFunction() {
             @Override
-            public Object apply(Object t) {
-                return ((Student) t).getSurname() + " " + ((Student) t).getName();
+            public Object apply(Object student) {
+                return ((Student) student).getSurname()
+                        + " " + ((Student) student).getName();
             }
         };
 
         MyComparator sortBySurname = new MyComparator() {
             @Override
-            public int compare(Object o1, Object o2) {
-                return ((Student) o1).getSurname().compareTo(((Student) o2).getSurname());
+            public int compare(Object firstStudent, Object secondStudent) {
+                return ((Student) firstStudent).getSurname()
+                        .compareTo(((Student) secondStudent).getSurname());
             }
         };
 
         SmartArray smartStudents = new BaseArray(students);
         smartStudents = new DistinctDecorator(smartStudents);
 
-        smartStudents = new MapDecorator(new DistinctDecorator(new FilterDecorator(
-                new SortDecorator(smartStudents, sortBySurname), filterBySecondYearAndGPA)), nameToFindUnique);
+        smartStudents = new MapDecorator(
+                new DistinctDecorator(
+                        new FilterDecorator(
+                                new SortDecorator(smartStudents, sortBySurname),
+                                filterBySecondYearAndGPA)),
+                nameToFindUnique);
         Object[] result = smartStudents.toArray();
         return Arrays.copyOf(result, result.length, String[].class);
     }
