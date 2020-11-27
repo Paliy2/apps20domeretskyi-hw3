@@ -8,7 +8,8 @@ public class DistinctDecorator extends SmartArrayDecorator {
 
     public DistinctDecorator(SmartArray smartArray) {
         super(smartArray);
-        this.array = new LinkedHashSet<>(Arrays.asList(this.smartArray.toArray())).toArray();
+        this.array = new LinkedHashSet<>(
+                Arrays.asList(this.smartArray.toArray())).toArray();
     }
 
     @Override

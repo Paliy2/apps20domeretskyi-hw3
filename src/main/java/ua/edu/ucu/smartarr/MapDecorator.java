@@ -9,7 +9,8 @@ public class MapDecorator extends SmartArrayDecorator {
 
     public MapDecorator(SmartArray smartArray, MyFunction action) {
         super(smartArray);
-        this.array = Arrays.stream(this.smartArray.toArray()).map(action::apply).toArray();
+        this.array = Arrays.stream(
+                this.smartArray.toArray()).map(action::apply).toArray();
     }
 
     @Override

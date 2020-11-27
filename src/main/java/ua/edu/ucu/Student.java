@@ -43,7 +43,6 @@ class Student {
                 + 255 * surname.hashCode();
     }
 
-
     @Override
     public boolean equals(Object fictiveStudent) {
         if (!(fictiveStudent instanceof Student)) {
@@ -51,9 +50,6 @@ class Student {
         }
 
         Student normalizedStudent = (Student) fictiveStudent;
-        if (normalizedStudent.hashCode() != hashCode()) {
-            return false;
-        }
 
         return this.GPA == normalizedStudent.GPA
                 && this.year == normalizedStudent.year

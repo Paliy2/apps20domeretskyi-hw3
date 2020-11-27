@@ -9,7 +9,8 @@ public class SortDecorator extends SmartArrayDecorator {
 
     public SortDecorator(SmartArray smarr, MyComparator sortBy) {
         super(smarr);
-        this.array = Arrays.stream(this.smartArray.toArray()).sorted(sortBy).toArray();
+        this.array = Arrays.stream(
+                this.smartArray.toArray()).sorted(sortBy).toArray();
     }
 
     @Override

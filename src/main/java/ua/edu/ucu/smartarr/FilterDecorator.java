@@ -9,7 +9,8 @@ public class FilterDecorator extends SmartArrayDecorator {
 
     public FilterDecorator(SmartArray smartArray, MyPredicate filterBy) {
         super(smartArray);
-        this.array = Arrays.stream(this.smartArray.toArray()).filter(filterBy::test).toArray();
+        this.array = Arrays.stream(
+                this.smartArray.toArray()).filter(filterBy::test).toArray();
     }
 
     @Override
