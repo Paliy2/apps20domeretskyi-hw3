@@ -36,4 +36,26 @@ class Student {
         return "Student{name=" + name + ", surname=" + surname + ", " + "GPA=" + GPA + ", year=" + year + '}';
     }
 
+    @Override
+    public int hashCode() {
+        return (int) GPA + 31 * year + 127 * name.hashCode()
+                + 255 * surname.hashCode();
+    }
+
+
+    @Override
+    public boolean equals(Object fictiveStudent) {
+        if (!(fictiveStudent instanceof Student)) {
+            return false;
+        }
+
+        Student normalizedStudent = (Student) fictiveStudent;
+        if (normalizedStudent.hashCode() != hashCode()) {
+            return false;
+        }
+
+        return this.GPA == normalizedStudent.GPA && this.year == normalizedStudent.year
+                && this.name.equals(normalizedStudent.name) && this.surname.equals(normalizedStudent.surname);
+
+    }
 }
