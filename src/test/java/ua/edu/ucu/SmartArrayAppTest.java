@@ -37,4 +37,21 @@ public class SmartArrayAppTest {
 
         assertArrayEquals(expectedStudentNames, studentNames);
     }
+
+    @Test
+    public void testStudentEquals() {
+        Student ivar = new Student("Ivar", "Grimstad", 3.9, 2);
+        Student anton = new Student("Antons", "Kranga", 4.0, 2);
+        assertNotEquals(ivar, anton);
+        assertEquals(ivar, ivar);
+        assertNotEquals(ivar, "Ivar");
+    }
+
+    @Test
+    public void testStudentToString() {
+        String expected = "Student{name=Ivar, surname=Grimstad, GPA=3.9, year=2}";
+        Student ivar = new Student("Ivar", "Grimstad", 3.9, 2);
+
+        assertEquals(expected, ivar.toString());
+    }
 }
